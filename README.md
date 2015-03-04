@@ -23,21 +23,24 @@ Quickstart
 
 Run the following commands:
 
-	./substitute.sh -p test.env -t template.ftl -o result.properties
+	`./substitute.sh -p test.env -t template.ftl -o result.properties`
 
 How it works
 ------------
 
-The environment configuration is the set of key-value pairs in format KEY=VALUE.
-Every entry is available in the template while processing and can be retrieved via ${KEY} according the Freemarket format.
+The environment configuration is the set of key-value pairs in format `KEY=VALUE`.
+Every entry is available in the template while processing and can be retrieved via `${KEY}` according the Freemarket format.
 The bunch of entries with the same basis name and numerical endings in the format
+```
 MAP_0=...
 MAP_1=...
 ...
 MAP_N=...
-is evaluated to the map MAP['0']=..., MAP['1']=... etc.
-The map entries are available in template via ${MAP['0']} and can be also iterated:
+```
+is evaluated to the map `MAP['0']=..., MAP['1']=...` etc.
+The map entries are available in template via `${MAP['0']}` and can be also iterated:
+```
 <#list MAP?keys as key>
 ${MAP[key]}
 </#list>
-
+```
