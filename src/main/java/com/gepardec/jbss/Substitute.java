@@ -39,7 +39,6 @@ public class Substitute {
 		Map<String, Object> data = prepareData(properties);
 		
 		processTemplate(args[1], args[2], data);
-		System.exit(0);
 	}
 
 	private static void processTemplate(String templateFilename, String outputFilename, Map<String, Object> data) {
