@@ -15,7 +15,7 @@ Prerequisites
 Quickstart
 ----------
 
-1. Clone the Git-repository: `git clone git@github.com:Gepardec/jbss-substitute.git`
+1. Clone the Git-repository: `git clone https://github.com/Gepardec/jbss-substitute.git`
 2. Build project with maven (mvn clean install)
 3. Place the jar target/jbss-*-jar-with-dependencies.jar in the same folder with substitute.sh from src/main/resources
 4. Rename jbss-*-jar-with-dependencies.jar to substitute
