@@ -1,5 +1,6 @@
 package com.gepardec.jbss;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -44,17 +45,21 @@ public class Substitute {
 	private static void processTemplate(String templateFilename, String outputFilename, Map<String, Object> data) {
 		try {
 			Configuration config = new Configuration();
-			Template template = config.getTemplate(templateFilename);
+			File templateFile = new File(templateFilename);
+			File templateDir = templateFile.getParentFile();
+			if ( null == templateDir ){
+				templateDir = new File("./");
+			}
+			config.setDirectoryForTemplateLoading(templateDir);
+			Template template = config.getTemplate(templateFile.getName());
 			Writer out = new FileWriter(outputFilename);
 			template.process(data, out);
 			out.flush();
 			out.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.exit(1);
 		} catch (TemplateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.exit(1);
 		}
