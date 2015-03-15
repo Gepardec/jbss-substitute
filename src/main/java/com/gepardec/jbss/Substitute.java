@@ -19,22 +19,38 @@ import freemarker.template.TemplateException;
 public class Substitute {
 	
 	private static final Pattern MAP_VARIABLES_PATTER = Pattern.compile("(\\w+)_(\\d+)");
+	
+	private static void printUsage() {
+		StringBuffer out = new StringBuffer();
+		out.append("Usage:\n");
+		out.append("    substitute properties template output\n");
+		out.append("arguments:\n");
+		out.append("    properties: comma saparates list of environment-files.\n");
+		out.append("    template: freemarker template file\n");
+		out.append("    output: filename for output\n");
+
+		System.err.println(out.toString());
+	}
+
 
 	public static void main(String[] args) {
 		if(args.length != 3){
-			System.err.println("Invalid arguments. Expected: 1st: properties file, 2nd: template file, 3rd: output name");
+			printUsage();
 			System.exit(1);
 		}
 		
 		Properties properties = new Properties();
-		try {
-			properties.load(new FileInputStream(args[0]));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.exit(1);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(1);
+
+		for (String propFileName : args[0].split(",")) {			
+			try {
+				properties.load(new FileInputStream(propFileName));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				System.exit(1);
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.exit(1);
+			}
 		}
 		
 		Map<String, Object> data = prepareData(properties);
